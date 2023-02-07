@@ -120,6 +120,5 @@ export const CartProvider = ({ children }) => {
     clearItemFromCart,
     cartTotal,
   };
-
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
