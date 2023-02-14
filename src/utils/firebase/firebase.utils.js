@@ -70,7 +70,10 @@ export const getCategoriesAndDocuments = async () => {
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
 
-export const createUserDocumentFromAuth = async (userAuth, info = {}) => {
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalDetails = {}
+) => {
   if (!userAuth) return;
 
   const userDocRef = doc(db, "users", userAuth.uid);
@@ -87,7 +90,7 @@ export const createUserDocumentFromAuth = async (userAuth, info = {}) => {
         displayName,
         email,
         createdAt,
-        ...info,
+        ...additionalDetails,
       });
     } catch (error) {
       console.error(error);

@@ -1,8 +1,5 @@
 import { DirectoryContainer } from "./directory.style";
 import DirectoryItem from "../directory-item/directory-item.component";
-import { useSelector } from "react-redux";
-import { selectCategoriesIsLoading } from "../../store/categories/category.selector";
-import Spinner from "../spinner/spinner.component";
 
 const categories = [
   {
@@ -38,17 +35,11 @@ const categories = [
 ];
 
 const Directory = () => {
-  const isLoading = useSelector(selectCategoriesIsLoading);
-
   return (
     <DirectoryContainer>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        categories.map((category) => (
-          <DirectoryItem key={category.id} category={category} />
-        ))
-      )}
+      {categories.map((category) => (
+        <DirectoryItem key={category.id} category={category} />
+      ))}
     </DirectoryContainer>
   );
 };
