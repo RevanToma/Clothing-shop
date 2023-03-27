@@ -10,7 +10,7 @@ import {
   onAuthStateChangeListener,
   createUserDocumentFromAuth,
 } from "./utils/firebase/firebase.utils";
-import { setCurrentUser } from "./store/user/user.action";
+import { setCurrentUser } from "./store/user/user.reducer";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,11 +21,12 @@ const App = () => {
       if (user) {
         createUserDocumentFromAuth(user);
       }
+      console.log(setCurrentUser(user));
       dispatch(setCurrentUser(user));
     });
 
     return unSubscribe;
-  });
+  }, []);
 
   return (
     <Routes>
