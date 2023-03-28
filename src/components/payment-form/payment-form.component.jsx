@@ -60,6 +60,8 @@ const PaymentForm = () => {
   return (
     <S.PaymentFormContainer>
       <img src={VisaCard} alt="visa card" />
+      <span>Test Card info:</span>
+      <span>Nr: 4242 4242 4242 4242 MM/ÅÅ 04/424 CVC:42424 </span>
       <S.FormContainer onSubmit={paymentHandler}>
         <h2>Credit card Payment:</h2>
         <CardElement />
