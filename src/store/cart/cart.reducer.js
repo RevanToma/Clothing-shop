@@ -32,7 +32,9 @@ const removeItem = (cartItems, cartItemToRemove) => {
       : cartItem
   );
 };
-
+export const clearCartItems = () => (dispatch) => {
+  dispatch(setCartItems([]));
+};
 const clearCartItem = (cartItems, cartItemToClear) =>
   cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
 

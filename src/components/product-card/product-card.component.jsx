@@ -7,13 +7,17 @@ import {
 
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../../store/cart/cart.reducer";
-import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
+import ToastNotification from "../toaster/toast.component";
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
   const dispatch = useDispatch();
 
-  const addProductToCart = () => dispatch(addItemToCart(product));
+  const addProductToCart = () => {
+    dispatch(addItemToCart(product));
+    ToastNotification("Added item to cart", true);
+  };
 
   return (
     <ProductCartContainer>

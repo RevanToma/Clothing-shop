@@ -25,4 +25,14 @@ export const NavLinks = styled.div`
 export const NavLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
+  transition: box-shadow 0.3s;
+
+  &:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+    border-radius: 10px;
+  }
+`;
+export const EmailContainer = styled.span`
+  margin: 10px;
+  user-select: none;
 `;

@@ -5,12 +5,14 @@ import Navigation from "./routes/navigation/navigation.component";
 import Authentication from "./routes/atuhentication/atuhentication.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
-import { useEffect } from "react";
+import ShoppingHistory from "./components/shopping-history/shopping-history.component";
+import { useEffect, Suspense } from "react";
 import {
   onAuthStateChangeListener,
   createUserDocumentFromAuth,
 } from "./utils/firebase/firebase.utils";
 import { setCurrentUser } from "./store/user/user.reducer";
+import Spinner from "./components/spinner/spinner.component";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -29,14 +31,17 @@ const App = () => {
   }, []);
 
   return (
-    <Routes>
-      <Route path="/" element={<Navigation />}>
-        <Route index element={<Home />} />
-        <Route path="shop/*" element={<Shop />} />
-        <Route path="auth" element={<Authentication />} />
-        <Route path="checkout" element={<Checkout />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={<Spinner />}>
+      <Routes>
+        <Route path="/" element={<Navigation />}>
+          <Route index element={<Home />} />
+          <Route path="shop/*" element={<Shop />} />
+          <Route path="auth" element={<Authentication />} />
+          <Route path="checkout" element={<Checkout />} />
+          <Route path="shoppingHistory" element={<ShoppingHistory />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 };
 

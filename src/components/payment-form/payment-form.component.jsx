@@ -1,21 +1,36 @@
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-
-import { selectCartTotal } from "../../store/cart/cart.selector";
-import { selectCurrentUser } from "../../store/user/user.selector";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectCartItems,
+  selectCartTotal,
+} from "../../store/cart/cart.selector";
+import { clearCartItems } from "../../store/cart/cart.reducer";
+import {
+  selectCurrentUser,
+  selectCurrentUserCartITems,
+} from "../../store/user/user.selector";
 import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import toast from "react-hot-toast";
 import * as S from "./payment-form.styles";
 import VisaCard from "../../assets/visa.svg";
+import {
+  setCurrentCartItems,
+  setShoppingHistorySuccess,
+} from "../../store/user/user.reducer";
+import { updateUserDataInFirebase } from "../../utils/firebase/firebase.utils";
 const PaymentForm = () => {
   const stripe = useStripe();
   const elements = useElements();
-
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+  const userCartItems = useSelector(selectCurrentUserCartITems);
   const amount = useSelector(selectCartTotal);
   const currentUser = useSelector(selectCurrentUser);
-
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+
+  // console.log(cartItems);
+  console.log("CART ITEMS", cartItems);
 
   const paymentHandler = async (e) => {
     e.preventDefault();
@@ -48,6 +63,7 @@ const PaymentForm = () => {
           card: elements.getElement(CardElement),
           billing_details: {
             name: currentUser ? currentUser.displayName : "guest",
+            email: currentUser ? currentUser.email : "",
           },
         },
       });
@@ -56,6 +72,11 @@ const PaymentForm = () => {
         throw new Error(paymentResult.error.message);
       } else {
         if (paymentResult.paymentIntent.status === "succeeded") {
+          dispatch(setCurrentCartItems(cartItems));
+          updateUserDataInFirebase("cartItems", cartItems);
+          dispatch(clearCartItems(cartItems, cartItems));
+          const cardElement = elements.getElement(CardElement);
+          cardElement.clear();
           return "Payment Successful";
         }
       }
@@ -85,6 +106,7 @@ const PaymentForm = () => {
       }
     );
   };
+  console.log("USER CART ITEMS", userCartItems);
   return (
     <S.PaymentFormContainer>
       <img src={VisaCard} alt="visa card" />

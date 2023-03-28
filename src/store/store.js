@@ -11,19 +11,19 @@ import { rootReducer } from "./root-reducer";
 // const composedEnhancers = compose(applyMiddleware(...middleWares));
 // export const store = createStore(rootReducer, undefined, composedEnhancers);
 
-const persistConfig = {
-  key: "root",
-  storage,
-  whilelist: ["cart"],
-};
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 // export const store = configureStore({
 //   reducer: persistedReducer,
 //   middleware: [process.env.NODE_ENV !== "production" && logger, thunk].filter(
 //     Boolean
 //   ),
 // });
+
+const persistConfig = {
+  key: "root",
+  storage,
+  whilelist: ["cart"],
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(
   Boolean

@@ -18,6 +18,7 @@ import {
   writeBatch,
   query,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyBMsz2W4Q9cgwGmKmGTKNbPhv-K_AS9L04",
@@ -80,13 +81,14 @@ export const createUserDocumentFromAuth = async (userAuth, info = {}) => {
   // check if userdata
   // create / set the doc with the data from userAuth in my collection
   if (!userSnapshot.exists()) {
-    const { displayName, email } = userAuth;
+    const { displayName, email, cartItems } = userAuth;
     const createdAt = new Date();
     try {
       await setDoc(userDocRef, {
         displayName,
         email,
         createdAt,
+        ...cartItems,
         ...info,
       });
     } catch (error) {
@@ -96,6 +98,40 @@ export const createUserDocumentFromAuth = async (userAuth, info = {}) => {
 
   // if exist ? userDocRef
   return userDocRef;
+};
+
+export const updateUserDataInFirebase = async (field, data) => {
+  const auth = getAuth();
+  if (!auth || !auth.currentUser) return;
+
+  try {
+    const userDocRef = doc(db, "users", auth.currentUser.uid);
+    await updateDoc(userDocRef, {
+      [field]: data,
+    });
+  } catch (error) {
+    throw new Error(error);
+  }
+};
+export const getCurrentUserCartItems = async () => {
+  const currentUser = auth.currentUser;
+  if (!currentUser) {
+    throw new Error("No user is signed in!");
+  }
+
+  const userDocRef = doc(db, "users", currentUser.uid);
+  const userDocSnapshot = await getDoc(userDocRef);
+
+  if (!userDocSnapshot.exists()) {
+    throw new Error("User document does not exist!");
+  }
+
+  const cartItems = userDocSnapshot.get("cartItems");
+  if (!cartItems || !Array.isArray(cartItems)) {
+    throw new Error("Invalid cartItems data!");
+  }
+
+  return cartItems;
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
