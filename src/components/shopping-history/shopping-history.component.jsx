@@ -1,4 +1,3 @@
-import Checkout from "../../routes/checkout/checkout.component";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUserCartITems } from "../../store/user/user.selector";
@@ -10,7 +9,7 @@ const ShoppingHistory = () => {
 
   useEffect(() => {
     dispatch(getShoppingHistory());
-  }, []);
+  }, [dispatch]);
 
   return (
     <S.HistoryContainer>

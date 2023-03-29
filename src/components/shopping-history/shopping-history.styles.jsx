@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const HistoryContainer = styled.div`
   display: flex;
+  width: 100vw;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -10,7 +11,7 @@ export const HistoryContainer = styled.div`
   }
 `;
 export const ShoppingHistoryContainer = styled.div`
-  width: 50%;
+  width: 100%;
   display: flex;
   align-items: center;
   min-height: 100px;

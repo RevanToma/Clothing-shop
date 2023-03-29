@@ -6,16 +6,26 @@ export const NavigationContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 25px;
+  @media (max-width: 610px) {
+    flex-direction: column;
+    margin-top: 20px;
+    justify-content: center;
+  }
 `;
 export const LogoContainer = styled(Link)`
-  height: 100%;
-  width: 70px;
-  padding: 25px;
+  border: 1px solid #c0c3c3;
+  border-radius: 50%;
+  padding: 10px;
+  transition: border 0.3s;
+
+  &:hover {
+    border: 1px solid #626767;
+  }
 `;
 
 export const NavLinks = styled.div`
-  width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -27,12 +37,15 @@ export const NavLink = styled(Link)`
   cursor: pointer;
   transition: box-shadow 0.3s;
 
+  border-radius: 10px;
+  margin: 0;
+  transition: border 0.3s;
+
   &:hover {
-    box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
-    border-radius: 10px;
+    border: 1px solid #626767;
   }
 `;
-export const EmailContainer = styled.span`
+export const EmailContainer = styled(Link)`
   margin: 10px;
   user-select: none;
 `;

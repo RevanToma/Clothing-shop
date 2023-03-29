@@ -13,6 +13,7 @@ import {
 } from "./utils/firebase/firebase.utils";
 import { setCurrentUser } from "./store/user/user.reducer";
 import Spinner from "./components/spinner/spinner.component";
+import SideMenu from "./components/side-menu/side-menu.component";
 
 const App = () => {
   const dispatch = useDispatch();

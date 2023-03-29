@@ -16,4 +16,10 @@ export const Preview = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 20px;
+
+  @media (max-width: 610px) {
+    row-gap: 10px;
+    width: 100vw;
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;

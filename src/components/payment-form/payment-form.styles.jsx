@@ -9,6 +9,7 @@ export const PaymentFormContainer = styled.div`
 
   box-shadow: 0px 0px 5px 5px #eeeeee;
   padding: 2rem;
+
   img {
     width: 150px;
   }
@@ -16,10 +17,16 @@ export const PaymentFormContainer = styled.div`
     color: #bbb;
     font-family: Poppins;
   }
+  @media (max-width: 610px) {
+    width: 100%;
+  }
 `;
 export const FormContainer = styled.form`
   height: 100%;
   min-width: 500px;
+  @media (max-width: 610px) {
+    min-width: 100%;
+  }
 `;
 export const PaymentButton = styled(Button)`
   width: 100%;

@@ -14,10 +14,13 @@ export const CartDropdownContainer = styled.div`
   padding: 20px;
   border: 1px solid black;
   background-color: white;
-  top: 90px;
+  ${(props) => (props.position === "top" ? "top: 70px" : "bottom: 180px")};
+
   right: 40px;
   z-index: 5;
-
+  @media (max-width: 610px) {
+    top: 125px;
+  }
   ${BaseButton},
   ${GooogleSingInButton},
   ${InvertedButton} {

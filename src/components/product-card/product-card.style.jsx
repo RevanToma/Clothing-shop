@@ -16,11 +16,9 @@ export const ProductCartContainer = styled.div`
   }
 
   button {
-    width: 80%;
     opacity: 0.7;
     position: absolute;
     top: 255px;
-    display: none;
   }
 
   &:hover {
@@ -36,7 +34,7 @@ export const ProductCartContainer = styled.div`
 `;
 
 export const Footer = styled.div`
-  width: 100%;
+  width: fit-content;
   height: 5%;
   display: flex;
   justify-content: space-between;
