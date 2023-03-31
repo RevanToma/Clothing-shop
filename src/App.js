@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
-
+import { GlobalStyle } from "./global.styles";
 import { useEffect, Suspense, lazy } from "react";
 import {
   onAuthStateChangeListener,
@@ -40,6 +40,7 @@ const App = () => {
 
   return (
     <Suspense fallback={<Spinner />}>
+      <GlobalStyle />
       <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index element={<Home />} />
