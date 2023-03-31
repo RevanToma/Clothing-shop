@@ -14,10 +14,7 @@ import { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import toast from "react-hot-toast";
 import * as S from "./payment-form.styles";
 import VisaCard from "../../assets/visa.svg";
-import {
-  setCurrentCartItems,
-  setShoppingHistorySuccess,
-} from "../../store/user/user.reducer";
+import { setCurrentCartItems } from "../../store/user/user.reducer";
 import { updateUserDataInFirebase } from "../../utils/firebase/firebase.utils";
 const PaymentForm = () => {
   const stripe = useStripe();
