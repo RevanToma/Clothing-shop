@@ -1,19 +1,26 @@
-import Home from "./routes/home/home.component";
 import { useDispatch } from "react-redux";
 import { Routes, Route } from "react-router-dom";
-import Navigation from "./routes/navigation/navigation.component";
-import Authentication from "./routes/atuhentication/atuhentication.component";
-import Shop from "./routes/shop/shop.component";
-import Checkout from "./routes/checkout/checkout.component";
-import ShoppingHistory from "./components/shopping-history/shopping-history.component";
-import { useEffect, Suspense } from "react";
+
+import { useEffect, Suspense, lazy } from "react";
 import {
   onAuthStateChangeListener,
   createUserDocumentFromAuth,
 } from "./utils/firebase/firebase.utils";
 import { setCurrentUser } from "./store/user/user.reducer";
 import Spinner from "./components/spinner/spinner.component";
-import SideMenu from "./components/side-menu/side-menu.component";
+
+const Home = lazy(() => import("./routes/home/home.component"));
+const Authentication = lazy(() =>
+  import("./routes/atuhentication/atuhentication.component")
+);
+const Shop = lazy(() => import("./routes/shop/shop.component"));
+const Checkout = lazy(() => import("./routes/checkout/checkout.component"));
+const ShoppingHistory = lazy(() =>
+  import("./components/shopping-history/shopping-history.component")
+);
+const Navigation = lazy(() =>
+  import("./routes/navigation/navigation.component")
+);
 
 const App = () => {
   const dispatch = useDispatch();
